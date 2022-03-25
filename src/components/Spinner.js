@@ -15,6 +15,14 @@ const Spinner = () => {
   const secondsRef = useRef();
   const [result, setResult] = useState('Paina pyöritä nappia, tai Aloita nappia');
   const [timer, setTimer] = useState();
+  const [speak, setSpeak] = useState(true);
+
+  const sayResult = (text) => {
+    if(window.SpeechSynthesis) {
+      let utterance = new SpeechSynthesisUtterance(text);
+      speechSynthesis.speak(utterance);
+    }
+  };
 
   const spinHandler = (event) => {
     if(event) {
@@ -22,6 +30,9 @@ const Spinner = () => {
     }
     let res = results[Math.floor(Math.random() * results.length)];
     setResult(res);
+    if(speak) {
+      sayResult(res);
+    }
   }
   const setTimerHandler = (event) => {
     if(timer) {
@@ -30,10 +41,17 @@ const Spinner = () => {
       console.log('Stop the timer');
     }
     else {
+      // Do the first round immediately, then the next one timed
+      spinHandler();
       console.log('Start the timer');
       setTimer(setInterval(() => { spinHandler() }, +secondsRef.current.value * 1000));
     }
   };
+
+  const toggleSpeak = (event) => {
+    event.preventDefault();
+    setSpeak(speak => !speak);
+  }
 
   return <>
     <p>{ result }</p>
@@ -41,6 +59,7 @@ const Spinner = () => {
     <h3>Pyöritä automaattisesti</h3>
     Pyörityksen väli <input type="number" defaultValue="30" ref={secondsRef} /> sekuntia
     <button type="button" onClick={setTimerHandler}>{ timer ? 'Lopeta' : 'Aloita'}</button>
+    <button type="button" onClick={toggleSpeak}>{speak ? 'Älä puhu' : 'Puhu'}</button>
   </>;
 }
 
