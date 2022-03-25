@@ -12,7 +12,7 @@ for(const l of limbs) {
 }
 console.log(results);
 
-const Spinner = () => {
+const Spinner = (props) => {
   const secondsRef = useRef();
   const [result, setResult] = useState('Paina pyöritä nappia, tai Aloita nappia');
   const [timer, setTimer] = useState();
@@ -22,6 +22,13 @@ const Spinner = () => {
   const sayResult = (text) => {
     if(window.SpeechSynthesis) {
       let utterance = new SpeechSynthesisUtterance(text);
+      if(props.utterance.voice) {
+        utterance.voice = props.utterance.voice;
+        console.log(props.utterance.voice.name);
+      }
+      else {
+        console.log('Voice not set', props);
+      }
       speechSynthesis.speak(utterance);
     }
   };
