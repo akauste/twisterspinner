@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Clock from "./Clock";
 
 const limbs  = ['Vasen käsi', 'Oikea käsi', 'Vasen jalka', 'Oikea jalka'];
 const colors = ['vihreä', 'sininen', 'keltainen', 'punainen', 'ilmaan'];
@@ -16,6 +17,7 @@ const Spinner = () => {
   const [result, setResult] = useState('Paina pyöritä nappia, tai Aloita nappia');
   const [timer, setTimer] = useState();
   const [speak, setSpeak] = useState(true);
+  const [loopStart, setLoopStart] = useState();
 
   const sayResult = (text) => {
     if(window.SpeechSynthesis) {
@@ -43,8 +45,9 @@ const Spinner = () => {
     else {
       // Do the first round immediately, then the next one timed
       spinHandler();
+      setLoopStart(new Date());
       console.log('Start the timer');
-      setTimer(setInterval(() => { spinHandler() }, +secondsRef.current.value * 1000));
+      setTimer(setInterval(() => { setLoopStart(new Date()); spinHandler() }, +secondsRef.current.value * 1000));
     }
   };
 
@@ -57,6 +60,7 @@ const Spinner = () => {
     <p>{ result }</p>
     <button type="button" onClick={spinHandler}>Pyöritä</button>
     <h3>Pyöritä automaattisesti</h3>
+    { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
     Pyörityksen väli <input type="number" defaultValue="30" ref={secondsRef} /> sekuntia
     <button type="button" onClick={setTimerHandler}>{ timer ? 'Lopeta' : 'Aloita'}</button>
     <button type="button" onClick={toggleSpeak}>{speak ? 'Älä puhu' : 'Puhu'}</button>
