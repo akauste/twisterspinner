@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import Clock from "./Clock";
 import SVGDial from "./SVGDial";
 
-const limbs  = ['Vasen käsi', 'Oikea käsi', 'Vasen jalka', 'Oikea jalka'];
-const colors = ['vihreä', 'sininen', 'keltainen', 'punainen', 'ilmaan'];
+const limbs  = ['Oikea käsi', 'Oikea jalka', 'Vasen jalka', 'Vasen käsi'];
+const colors = ['punainen', 'vihreä', 'sininen', 'keltainen', 'ilmaan'];
 
 const results = [];
 for(const l of limbs) {
@@ -41,10 +41,10 @@ const Spinner = (props) => {
     if(event) {
       event.preventDefault();
     }
-    let res = results[Math.floor(Math.random() * results.length)];
+    const res = Math.floor(Math.random() * results.length);
     setResult(res);
     if(speak) {
-      sayResult(res);
+      sayResult(results[res]);
     }
   }
   const setTimerHandler = (event) => {
@@ -66,25 +66,10 @@ const Spinner = (props) => {
     event.preventDefault();
     setSpeak(speak => !speak);
   }
-  const spots = [];
-  const color = ['red', 'green', 'blue', 'yellow', 'transparent'];
-  for(let i=0; i < 20; i++) {
-    const rads = 2*Math.PI/20*(i+0.5);
-    spots.push(
-      <circle 
-        key={`dot-${i}`}
-        cx={Math.sin(rads)*85} 
-        cy={Math.cos(rads)*85} 
-        r={12} 
-        fill={color[ i % 5 ]}
-        stroke={'#333'}
-        strokeWidth={1}
-      />);
-  }
 
   return <>
-    <SVGDial />
-    <p id="result">{ result || t('Press spin or start button') }</p>
+    <SVGDial position={result} />
+    <p id="result">{ results[result] || t('Press spin or start button') }</p>
     <button type="button" aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
     <h3>{t('Spin automatically')}</h3>
     { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
