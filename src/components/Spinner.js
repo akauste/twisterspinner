@@ -64,8 +64,8 @@ const Spinner = (props) => {
   }
 
   return <>
-    <p>{ result }</p>
-    <button type="button" onClick={spinHandler}>Pyöritä</button>
+    <p id="result">{ result }</p>
+    <button type="button" aria-label="spin" onClick={spinHandler}>Pyöritä</button>
     <h3>Pyöritä automaattisesti</h3>
     { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
     Pyörityksen väli <input type="number" defaultValue="30" ref={secondsRef} /> sekuntia
