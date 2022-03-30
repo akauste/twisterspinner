@@ -15,9 +15,9 @@ for(const l of limbs) {
 console.log(results);
 
 const Spinner = (props) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const secondsRef = useRef();
-  const [result, setResult] = useState(t('Paina pyöritä nappia, tai Aloita nappia'));
+  const [result, setResult] = useState();
   const [timer, setTimer] = useState();
   const [speak, setSpeak] = useState(true);
   const [loopStart, setLoopStart] = useState();
@@ -67,13 +67,13 @@ const Spinner = (props) => {
   }
 
   return <>
-    <p id="result">{ result }</p>
+    <p id="result">{ result || t('Press spin or start button') }</p>
     <button type="button" aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
     <h3>{t('Spin automatically')}</h3>
     { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
-    Pyörityksen väli <input type="number" defaultValue="30" ref={secondsRef} /> sekuntia
-    <button type="button" onClick={setTimerHandler}>{ timer ? 'Lopeta' : 'Aloita'}</button>
-    <button type="button" onClick={toggleSpeak}>{speak ? 'Älä puhu' : 'Puhu'}</button>
+    {t('Time between spins')} <input type="number" defaultValue="30" ref={secondsRef} /> {t('seconds')}
+    <button type="button" onClick={setTimerHandler}>{ timer ? t('Stop') : t('Start')}</button>
+    <button type="button" onClick={toggleSpeak}>{speak ? t("Don't speak") : t('Speak')}</button>
   </>;
 }
 
