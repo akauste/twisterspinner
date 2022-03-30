@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import classes from './Clock.module.css';
 
 const Clock = (props) => {
   const {startTime, maxTime, isRunning} = props;
   const [time, setTime] = useState();
+  const { t } = useTranslation();
 
   useEffect(() => {
     let interval;
@@ -17,9 +20,9 @@ const Clock = (props) => {
   }, [maxTime, startTime]);
 
   if(!isRunning) {
-    return <span>Pysäytetty</span>;
+    return <span>{t('Stopped')}</span>;
   }
 
-  return <span style={{ fontSize: '2em' }}>{ (time/1000).toFixed(2).replace('.', ':') }</span>;
+  return <span className={classes.clock}>{ (time/1000).toFixed(2).replace('.', ':') }</span>;
 };
 export default Clock;

@@ -30,6 +30,7 @@ i18n.use(initReactI18next)
           'Speach synthetisizer is unavaillable': 'Puhesyntetisaattori ei ole käytössä',
           'Speach synthetisizer on': 'Puhe syntetisaattori päällä',
           'Voice': 'Ääni',
+          'Stopped': 'Pysäytetty',
         },
       }
     }
