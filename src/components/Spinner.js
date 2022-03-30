@@ -1,4 +1,6 @@
 import { useRef, useState } from "react";
+import { useTranslation } from 'react-i18next';
+
 import Clock from "./Clock";
 
 const limbs  = ['Vasen käsi', 'Oikea käsi', 'Vasen jalka', 'Oikea jalka'];
@@ -13,8 +15,9 @@ for(const l of limbs) {
 console.log(results);
 
 const Spinner = (props) => {
+  const { t, i18n } = useTranslation();
   const secondsRef = useRef();
-  const [result, setResult] = useState('Paina pyöritä nappia, tai Aloita nappia');
+  const [result, setResult] = useState(t('Paina pyöritä nappia, tai Aloita nappia'));
   const [timer, setTimer] = useState();
   const [speak, setSpeak] = useState(true);
   const [loopStart, setLoopStart] = useState();
@@ -65,8 +68,8 @@ const Spinner = (props) => {
 
   return <>
     <p id="result">{ result }</p>
-    <button type="button" aria-label="spin" onClick={spinHandler}>Pyöritä</button>
-    <h3>Pyöritä automaattisesti</h3>
+    <button type="button" aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
+    <h3>{t('Spin automatically')}</h3>
     { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
     Pyörityksen väli <input type="number" defaultValue="30" ref={secondsRef} /> sekuntia
     <button type="button" onClick={setTimerHandler}>{ timer ? 'Lopeta' : 'Aloita'}</button>
