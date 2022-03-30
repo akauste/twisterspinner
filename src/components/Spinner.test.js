@@ -2,6 +2,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import Spinner from "./Spinner";
+import classes from './Spinner.module.css';
 
 describe('<Spinner />', () => {
 

@@ -1,0 +1,29 @@
+.button {
+  background-color: lightseagreen;
+  padding: 0.6em 2em;
+  border: 0;
+  box-shadow: 0.2em 0.2em #008b8b22;
+  color: white;
+  border-radius: 4px;
+}
+.button:hover {
+  box-shadow: 0.1em 0.1em #008b8b22;
+  background-color: #20a288;
+}
+.inputNumber {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  width: 3em;
+  border: 1px solid gray;
+  border-radius: 3px;
+}
+.inputNumber:disabled {
+  border: 1px solid white;
+  -moz-appearance: textfield;
+}
+
+.inputNumber::-webkit-outer-spin-button:disabled,
+.inputNumber::-webkit-inner-spin-button:disabled {
+  -webkit-appearance: none;
+  margin: 0;
+}

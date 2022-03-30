@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import { useTranslation } from 'react-i18next';
 
+import classes from './Spinner.module.css';
+
 import Clock from "./Clock";
 import SVGDial from "./SVGDial";
 
@@ -70,13 +72,16 @@ const Spinner = (props) => {
   return <>
     <SVGDial position={result} />
     <p id="result">{ results[result] || t('Press spin or start button') }</p>
-    <button type="button" aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
+    <button type="button" className={classes.button} aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
     <h3>{t('Spin automatically')}</h3>
     { timer && loopStart && <p>Timer: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
-    {t('Time between spins')} <input type="number" defaultValue="30" ref={secondsRef} /> {t('seconds')}
-    <button type="button" onClick={setTimerHandler}>{ timer ? t('Stop') : t('Start')}</button>
-    <button type="button" onClick={toggleSpeak}>{speak ? t("Don't speak") : t('Speak')}</button>
+    <p>{t('Time between spins')}
+      <input type="number" class={classes.inputNumber} defaultValue="30" ref={secondsRef} disabled={ !!timer } /> {t('seconds')}
+    </p>
+    <button type="button" className={classes.button} onClick={setTimerHandler}>{ timer ? t('Stop') : t('Start')}</button>
   </>;
+
+  // <button type="button" onClick={toggleSpeak}>{speak ? t("Don't speak") : t('Speak')}</button>
 }
 
 export default Spinner;
