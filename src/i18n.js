@@ -31,6 +31,8 @@ i18n.use(initReactI18next)
           'Speach synthetisizer on': 'Puhe syntetisaattori päällä',
           'Voice': 'Ääni',
           'Stopped': 'Pysäytetty',
+
+          'Until next spin': 'Seuraavaan pyöritykseen',
         },
       }
     }

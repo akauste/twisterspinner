@@ -1,0 +1,16 @@
+@keyframes appear {
+  0% {
+    font-size: 0;
+    font-color: white;
+  }
+  100% {
+    font-color:black;
+    font-size: 2em;
+  }
+}
+
+.clock {
+  font-size: 2em;
+  animation-name: appear;
+  animation-duration: 400ms;
+}
