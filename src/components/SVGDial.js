@@ -1,5 +1,14 @@
 const SVGDial = (props) => {
-  const {position} = props;
+  let {position} = props;
+  let dirX, dirY; // Direction of the dial
+  if(position !== undefined) {
+    dirX = Math.sin(2*Math.PI/20*(position + 0.5));
+    dirY = -Math.cos(2*Math.PI/20*(position + 0.5));
+  }
+  else {
+    dirX = Math.sin(0);
+    dirY = -Math.cos(0);
+  }
 
   const spots = [];
   const color = ['red', 'green', 'blue', 'yellow', 'transparent'];
@@ -25,14 +34,16 @@ const SVGDial = (props) => {
     { spots.map(s => s) }
     <g id="body-figure">
       <circle cx={0} cy={-40} r={10} fill='none' stroke="black" strokeWidth={1} />
-      <line x1={0} y1={15} x2={0} y2={-30} stroke="black" strokeWidth={1} />
-      <line x1={0} y1={-20} x2={-30} y2={-50} stroke="black" strokeWidth={1} />
-      <line x1={0} y1={-20} x2={30} y2={-50} stroke="black" strokeWidth={1} />
-      <line x1={0} y1={15} x2={30} y2={60} stroke="black" strokeWidth={1} />
-      <line x1={0} y1={15} x2={-30} y2={60} stroke="black" strokeWidth={1} />
+      <line x1={0} y1={15} x2={0} y2={-30} stroke="black" strokeWidth={3} />
+      <line x1={0} y1={-20} x2={-30} y2={-50} stroke="black" strokeWidth={3} />
+      <line x1={0} y1={-20} x2={30} y2={-50} stroke="black" strokeWidth={3} />
+      <line x1={0} y1={15} x2={30} y2={60} stroke="black" strokeWidth={3} />
+      <line x1={0} y1={15} x2={-30} y2={60} stroke="black" strokeWidth={3} />
     </g>
     <g id="dial">
-      <line x1={0} y1={0} x2={Math.sin(2*Math.PI/20*(position + 0.5))*90} y2={-Math.cos(2*Math.PI/20*(position + 0.5))*90} stroke='black' strokeWidth={8} />
+      <line x1={0} y1={0} x2={dirX*90} y2={dirY*90} stroke='darkred' strokeWidth={8} />
+      <circle cx={0} cy={0} r={4} fill='darkred' strokeWidth={0} />
+      <circle cx={dirX*90} cy={dirY*90} r={4} fill='darkred' strokeWidth={0} />
     </g>
   </svg>);
 };
