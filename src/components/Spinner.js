@@ -76,7 +76,7 @@ const Spinner = (props) => {
     <h3>{t('Spin automatically')}</h3>
     { timer && loopStart && <p>{t('Until next spin')}: <Clock startTime={ loopStart } maxTime={ secondsRef.current.value } isRunning={true} /></p> }
     <p>{t('Time between spins')}
-      <input type="number" class={classes.inputNumber} defaultValue="30" ref={secondsRef} disabled={ !!timer } /> {t('seconds')}
+      <input type="number" className={classes.inputNumber} defaultValue="30" ref={secondsRef} disabled={ !!timer } /> {t('seconds')}
     </p>
     <button type="button" className={classes.button} onClick={setTimerHandler}>{ timer ? t('Stop') : t('Start')}</button>
     <button type="button" className={classes.button} onClick={toggleSpeak}>{speak ? t("Don't speak") : t('Speak')}</button>
