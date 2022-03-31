@@ -11,13 +11,10 @@ const SVGDial = (props) => {
   const [dial, setDial] = useState();
   
   useEffect(() => {
-    console.log('useEffect', props.position);
     if(endDial.current !== undefined) {
-      console.log('useEffect 1');
       // We have previous value
       const start = endDial.current;
       endDial.current = 360/20*(position+0.5);
-      console.log('Rotate start-end:', start, endDial.current);
       setDial(prev => ({
         round: ( prev ? prev.round + 1 : 1),
         now: new Date(),
@@ -30,7 +27,6 @@ const SVGDial = (props) => {
       }
     }
     else {
-      console.log('useEffect 3');
       endDial.current = 0;
     }
   }, [position]);
@@ -50,14 +46,14 @@ const SVGDial = (props) => {
         strokeWidth={1}
       />);
   }
-  
+
   return (<svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200" style={{width: 200, height: 200}}>
     <g id="background">
-    <circle cx={0} cy={0} r={95} fill={'silver'}  stroke={'gray'} strokeWidth={5} />
-    <circle cx={0} cy={0} r={10} fill={'gray'}  stroke={'gray'} strokeWidth={2} />
-    <line x={0} y1={-98} y2={98} stroke="white" strokeWidth={0.5}></line>
-    <line y={0} x1={-98} x2={98} stroke="white" strokeWidth={0.5}></line>
-    { spots.map(s => s) }
+      <circle cx={0} cy={0} r={95} fill={'silver'}  stroke={'gray'} strokeWidth={5} />
+      <circle cx={0} cy={0} r={10} fill={'gray'}  stroke={'gray'} strokeWidth={2} />
+      <line x={0} y1={-98} y2={98} stroke="white" strokeWidth={0.5}></line>
+      <line y={0} x1={-98} x2={98} stroke="white" strokeWidth={0.5}></line>
+      { spots.map(s => s) }
     </g>
     <g id="body-figure">
       <circle cx={0} cy={-40} r={10} fill='none' stroke="black" strokeWidth={1} />
