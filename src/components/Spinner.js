@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import classes from './Spinner.module.css';
 
 import Clock from "./Clock";
-import SVGDial from "./SVGDial";
+import SpinnerImage from "./SVG/SpinnerImage";
 
 const limbs  = ['Oikea käsi', 'Oikea jalka', 'Vasen jalka', 'Vasen käsi'];
 const colors = ['punainen', 'vihreä', 'sininen', 'keltainen', 'ilmaan'];
@@ -70,7 +70,7 @@ const Spinner = (props) => {
   }
 
   return <>
-    <SVGDial position={result} />
+    <SpinnerImage position={result} />
     <p id="result">{ results[result] || t('Press spin or start button') }</p>
     <button type="button" className={classes.button} aria-label="spin" onClick={spinHandler}>{t('Spin')}</button>
     <h3>{t('Spin automatically')}</h3>
