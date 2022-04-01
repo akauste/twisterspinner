@@ -2,13 +2,12 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from '@testing-library/user-event';
 import Spinner from "./Spinner";
-import classes from './Spinner.module.css';
 
 describe('<Spinner />', () => {
 
   test('has the header text', () => {
     render(<Spinner />);
-    const header = screen.getByText(/Pyöritä automaattisesti/i);
+    const header = screen.getByText(/Spin automatically/i);
     expect(header).toBeVisible();
   });
   
@@ -19,7 +18,7 @@ describe('<Spinner />', () => {
     const resElem = container.querySelector('#result');
     const initValue = resElem.innerHTML;
     
-    const spinButton = screen.getByText("Pyöritä");
+    const spinButton = screen.getByText("Spin");
     userEvent.click(spinButton);
 
     expect(resElem.innerHTML).not.toEqual(initValue);
