@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import SpinnerBackground from "./SpinnerBackground";
 import SpinnerBackgroundBody from "./SpinnerBackgroundBody";
 
-const SVGDial = (props) => {
+const SpinnerImage = (props) => {
   let {position} = props;
   // Direction of the dial
   const dirX = Math.sin(0);
@@ -67,4 +67,4 @@ const SVGDial = (props) => {
     </g>
   </svg>);
 };
-export default SVGDial;
+export default SpinnerImage;
